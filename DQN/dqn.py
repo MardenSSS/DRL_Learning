@@ -36,7 +36,10 @@ class Qnet(torch.nn.Module):
 
 class DQN:
     def __init__(self, state_dim, hidden_dim, action_dim, learning_rate, gamma, epsilon, target_update, device):
+        # 输出维度
         self.action_dim = action_dim
+        # 训练设备：cpu/gpu
+        self.device = device
         # Q网络
         self.q_net = Qnet(state_dim, hidden_dim, action_dim).to(device)
         # 目标网络
@@ -51,7 +54,6 @@ class DQN:
         self.target_update = target_update
         # 计数器，记录更新次数
         self.count = 0
-        self.device = device
 
     def take_action(self, state):
         if np.random.random() < self.epsilon:
@@ -84,3 +86,9 @@ class DQN:
             # 更新目标网络
             self.target_q_net.load_state_dict(self.q_net.state_dict())
         self.count += 1
+
+    def save(self):
+        torch.save(self.q_net.state_dict(), './model/dqn_model.pth')
+
+    def load(self):
+        self.q_net.load_state_dict(torch.load('./model/dqn_model.pth'))

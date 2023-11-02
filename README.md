@@ -9,6 +9,7 @@ DRL_Learning: A learning framework of Deep Reinforcement Learning
 <li>python = 3.8.18</li>
 <li>pytorch = 1.13.1</li>
 <li>gym = 0.25.2</li>
+<li>pygame = 2.5.2</li>
 </ul>
 
 ### Tips1:
