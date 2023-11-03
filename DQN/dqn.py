@@ -87,8 +87,10 @@ class DQN:
             self.target_q_net.load_state_dict(self.q_net.state_dict())
         self.count += 1
 
+    # 保存模型
     def save(self):
         torch.save(self.q_net.state_dict(), './model/dqn_model.pth')
 
+    # 读取模型
     def load(self):
         self.q_net.load_state_dict(torch.load('./model/dqn_model.pth'))
